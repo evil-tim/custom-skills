@@ -9,7 +9,7 @@ description: >
   depth even without those verbs — e.g. "what's really going on with X," "help me understand Y,"
   "is Z actually true," "what are the tradeoffs of W," or "what should I think about X."
   Do NOT trigger for simple factual lookups, casual conversation, or quick one-sentence answers.
-version: 2.0.0
+version: 3.0.0
 metadata:
   hermes:
     tags: [research, analysis, reasoning, markdown]
@@ -40,6 +40,33 @@ training-data claims do not count as primary sources.
 
 ---
 
+## Metacognitive Audit (Internal — Do Before Drafting)
+
+Before composing the analysis, mentally assign each major claim you plan to make to a
+confidence tier. This is not shown to the user — it calibrates how you write each part.
+
+| Tier | When to use |
+|------|-------------|
+| **Confident** | Well-established, frequently confirmed, low variance in your training |
+| **Best Estimate** | Plausible and likely, but meaningful uncertainty remains — you might answer differently if asked again |
+| **Uncertain** | Weak or conflicting signal; state this explicitly inline |
+| **Unknown** | No reliable basis; abstain on this specific sub-claim rather than guess |
+
+The goal is **instance-level** confidence signaling, not aggregate hedging. A response that
+hedges every sentence uniformly provides no signal — it is as misleading as false confidence.
+The hedge must be *attached to the specific claim* it reflects, not distributed across the response.
+
+**Tail knowledge — apply extra scrutiny to:**
+- Specific numbers, statistics, or dates (plausible-sounding figures can be confabulated)
+- Named individuals in niche domains (credentials, affiliations, specific quotes)
+- Highly specific sub-claims nested inside otherwise well-established topics
+- Any claim where you notice you are retrieving a specific detail rather than a general pattern
+
+For these, isolate the uncertainty: *"The general picture here is solid; I'm less confident
+about [this specific detail] in particular."*
+
+---
+
 ## Output Structure
 
 Organize every analysis using this structure (omit sections only if genuinely not applicable):
@@ -60,6 +87,11 @@ and state the evidence, confidence level, and key assumption at that step. Label
 - **[Fact]** — directly supported by a named primary source
 - **[Inference]** — drawn from sourced material, with the logical step explicit
 - **[Judgment]** — reasoned assessment not supported by a single source
+
+Note: these labels describe *source type*, not confidence level — a [Fact] can still be
+uncertain if the source is limited or contested. Where confidence level matters, add it inline.
+Do not conflate having a source with being confident; do not conflate lacking a source with
+being uncertain.
 
 ### 5. Competing Positions (if applicable)
 For contested questions, present the strongest version of each major position before evaluating.
@@ -99,6 +131,18 @@ has not been resolved.
 
 Where two positions in the analysis are in tension, the contradiction must be resolved with
 a stated position. Acknowledging a contradiction without resolving it is not acceptable.
+
+**Hedging vocabulary — match language to actual confidence:**
+
+- *High confidence:* "Evidence consistently shows...", "It is well established that...", "X is..."
+- *Moderate confidence:* "Evidence suggests...", "This is likely because...", "Most accounts indicate...", "My best assessment is..."
+- *Low confidence:* "I'm not certain, but...", "There is conflicting evidence on...", "I have limited signal that..."
+- *Unknown:* "I don't have reliable information on this specific point.", "I'd be guessing here — worth checking a primary source."
+
+**What to avoid:**
+- Uniform hedging across all claims regardless of actual confidence (destroys the signal)
+- Burying uncertainty at the end of a claim ("X is true, but I might be wrong") — attach the hedge *to* the claim
+- Suppressing valid information purely because you're not 100% certain — hedged estimates have real value
 
 ---
 
@@ -160,3 +204,5 @@ Work through this actively before finalizing your response — don't treat it as
 - [ ] Quantitative estimates disclose basis and sensitivity, or are presented qualitatively
 - [ ] Source bias/perspective noted where relevant
 - [ ] What would change the conclusion is explicitly stated
+- [ ] Confidence level signaled at claim level, not uniformly across the response
+- [ ] Tail knowledge claims (specific stats, niche names, precise sub-claims) flagged or isolated
