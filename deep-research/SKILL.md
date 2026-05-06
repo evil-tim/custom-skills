@@ -9,7 +9,7 @@ description: >
   depth even without those verbs — e.g. "what's really going on with X," "help me understand Y,"
   "is Z actually true," "what are the tradeoffs of W," or "what should I think about X."
   Do NOT trigger for simple factual lookups, casual conversation, or quick one-sentence answers.
-version: 3.0.0
+version: 3.1.0
 metadata:
   hermes:
     tags: [research, analysis, reasoning, markdown]
@@ -92,6 +92,13 @@ Note: these labels describe *source type*, not confidence level — a [Fact] can
 uncertain if the source is limited or contested. Where confidence level matters, add it inline.
 Do not conflate having a source with being confident; do not conflate lacking a source with
 being uncertain.
+
+**Special case — Enrichment/Contradiction workflow:**
+When new evidence contradicts prior claims (e.g., original analysis assumes X, but web search shows Y happened since):
+1. State both claims with dates and sources
+2. Identify the **logical/temporal gap** (assumption was valid when made, but world changed)
+3. Resolve with explicit position: "Original analysis is not *wrong*, but *superseded by*..."
+4. Quantify the impact on downstream conclusions if material
 
 ### 5. Competing Positions (if applicable)
 For contested questions, present the strongest version of each major position before evaluating.
